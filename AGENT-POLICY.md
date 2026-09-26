@@ -1,0 +1,3 @@
+- Bash(rm *): The reviewer should report unsafe deletions; removing repository files is the author's decision.
+- Bash(git push *): The reviewer may inspect changes but must not publish commits or alter the remote repository.
+- Bash(docker *): Building or running containers changes local runtime state and remains an explicit author action.

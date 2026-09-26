@@ -4,54 +4,42 @@ svcdesk_decisions:
   C2: immutable      # reopen | immutable
   C3: vip            # matrix | vip
 ---
-<!-- ai-generated: ??% - TODO: replace ?? with your estimate and say how AI was used (the advisory flags this line until you do) -->
+<!-- ai-generated: 75% - AI drafted from the course contract and student-selected values; student should review and own the reasoning. -->
 
 # Decisions
 
-<!--
-How to fill this in (delete this comment when you are done):
-- The three values in the front matter must be the ones your RUNNING service exhibits. The checker probes the
-  service (checks 2.41, 2.35, 2.46) and compares them with this file (L1-CORE-4).
-- Keep the three headings starting with "## C1", "## C2", "## C3" and the five bold labels in each section. Write
-  at least 20 characters after every label; the lecturer reads this document, so write what you would say to
-  the service owner, not the minimum.
-- "Service owner": the role (never a person's name) who would sign this decision off, and why it is theirs.
-- "Customer outcome": what the reporter or the organisation gets from this choice, in one or two sentences.
-- Update the ai-generated line above to say how much of this text an AI wrote and how.
--->
-
 ## C1 - SLA clock for P1
 
-**Decision:** TODO
+**Decision:** Both P1 acknowledgement and resolution targets use elapsed wall-clock time, including nights and weekends.
 
-**Rejected alternative:** TODO
+**Rejected alternative:** I reject pausing P1 targets outside the Europe/Warsaw business window.
 
-**Reason:** TODO
+**Reason:** A P1 is a work-stopping emergency; the desk needs the same response expectation at 17:00 Friday as during a weekday shift.
 
-**Service owner:** TODO
+**Service owner:** The Service Desk product owner approves the priority-based service commitments and owns the effect on desk staffing.
 
-**Customer outcome:** TODO
+**Customer outcome:** People affected by a P1 receive a clear continuous-time promise; the desk bears the after-hours coverage burden.
 
 ## C2 - Closed tickets and reopening
 
-**Decision:** TODO
+**Decision:** A resolved ticket can be reopened within seven days, but a closed ticket cannot be changed; a new ticket links through `related_to`.
 
-**Rejected alternative:** TODO
+**Rejected alternative:** I reject reopening closed tickets during the seven-day window after closure.
 
-**Reason:** TODO
+**Reason:** Closure marks the reporter-confirmed record as final, preserving audit history; a linked follow-up keeps the original closure intact.
 
-**Service owner:** TODO
+**Service owner:** The Service Desk product owner owns ticket lifecycle policy and must keep reporting records stable after closure.
 
-**Customer outcome:** TODO
+**Customer outcome:** The reporter can still reopen an unresolved fix before closure; after closure, the follow-up remains visible without rewriting history.
 
 ## C3 - VIP reporters and the priority matrix
 
-**Decision:** TODO
+**Decision:** Apply the impact/urgency matrix as written, then raise VIP P3 or P4 tickets to P2; VIP P1 and P2 tickets stay unchanged.
 
-**Rejected alternative:** TODO
+**Rejected alternative:** I reject allowing VIP identity to have no effect when the matrix gives P3 or P4.
 
-**Reason:** TODO
+**Reason:** VIP visibility is a deliberate service commitment, but a P2 floor limits its effect and preserves the matrix for the most urgent issues.
 
-**Service owner:** TODO
+**Service owner:** The Service Desk product owner approves prioritization rules and balances executive visibility against operational capacity.
 
-**Customer outcome:** TODO
+**Customer outcome:** VIP reporters' lower-impact issues become visible at P2, while ordinary reporters retain the published matrix priority.
