@@ -15,6 +15,8 @@ from zoneinfo import ZoneInfo
 from fastapi import FastAPI, Header, Request
 from fastapi.responses import JSONResponse
 
+from svcdesk.dora import MetricInputError, calculate as calculate_dora
+
 app = FastAPI()
 WARSAW = ZoneInfo("Europe/Warsaw")
 PRIORITIES = (
@@ -125,6 +127,49 @@ def save_ticket(ticket: dict[str, Any]) -> None:
 @app.get("/health")
 def health():
     return {"status": "ok", "service": "svcdesk"}
+
+
+@app.post("/dora/metrics")
+async def dora_metrics(request: Request):
+    try:
+        body = await request.json()
+        return JSONResponse(status_code=200, content=calculate_dora(body))
+    except MetricInputError as exc:
+        return error(422, "validation", str(exc))
+    except Exception:
+        return error(400, "validation", "request body must be valid JSON")
+
+
+@app.get("/dora/ticket-events")
+def dora_ticket_events():
+    with connect() as db:
+        rows = db.execute("SELECT data FROM tickets").fetchall()
+    result: list[tuple[datetime, str, dict[str, str]]] = []
+    for row in rows:
+        ticket = json.loads(row["data"])
+        for phase, field in (
+            ("created", "created_at"),
+            ("acknowledged", "acknowledged_at"),
+            ("resolved", "resolved_at"),
+            ("closed", "closed_at"),
+        ):
+            at = ticket.get(field)
+            if at:
+                result.append(
+                    (
+                        parse_stored(at).astimezone(timezone.utc),
+                        ticket["id"],
+                        {
+                            "ticket_id": ticket["id"],
+                            "at": at,
+                            "phase": phase,
+                            "priority": ticket["priority"],
+                            "state": "new" if phase == "created" else phase,
+                        },
+                    )
+                )
+    result.sort(key=lambda item: (item[0], item[1]))
+    return [item[2] for item in result]
 
 
 @app.post("/tickets")
