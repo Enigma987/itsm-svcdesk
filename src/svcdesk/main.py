@@ -7,17 +7,22 @@ import json
 import os
 import sqlite3
 import uuid
+import urllib.error
+import urllib.parse
+import urllib.request
 from datetime import datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
 from fastapi import FastAPI, Header, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, PlainTextResponse
 
 from svcdesk.dora import MetricInputError, calculate as calculate_dora
+from svcdesk.metrics import HISTOGRAM, RequestMetricsMiddleware
 
 app = FastAPI()
+app.add_middleware(RequestMetricsMiddleware)
 WARSAW = ZoneInfo("Europe/Warsaw")
 PRIORITIES = (
     ("P1", "P2", "P3"),
@@ -127,6 +132,34 @@ def save_ticket(ticket: dict[str, Any]) -> None:
 @app.get("/health")
 def health():
     return {"status": "ok", "service": "svcdesk"}
+
+
+@app.get("/metrics", include_in_schema=False)
+def metrics():
+    return PlainTextResponse(
+        HISTOGRAM.exposition(),
+        media_type="text/plain; version=0.0.4; charset=utf-8",
+    )
+
+
+@app.get("/kb/search")
+def kb_search(q: str | None = None):
+    if not isinstance(q, str) or not 1 <= len(q) <= 200:
+        return error(422, "validation", "q must contain 1 to 200 characters")
+
+    base_url = os.environ.get("KB_INDEX_URL", "http://kb-index:8080").rstrip("/")
+    url = f"{base_url}/search?{urllib.parse.urlencode({'q': q})}"
+    request = urllib.request.Request(url, method="GET", headers={"Accept": "application/json"})
+    try:
+        with urllib.request.urlopen(request, timeout=3.0) as response:
+            if response.status != 200:
+                return error(502, "upstream_unavailable", "knowledge index is unavailable")
+            payload = json.loads(response.read())
+        if not isinstance(payload, dict) or "hits" not in payload:
+            raise ValueError("upstream response has no hits")
+        return {"query": q, "hits": payload["hits"]}
+    except (urllib.error.URLError, TimeoutError, OSError, ValueError, json.JSONDecodeError):
+        return error(502, "upstream_unavailable", "knowledge index is unavailable")
 
 
 @app.post("/dora/metrics")

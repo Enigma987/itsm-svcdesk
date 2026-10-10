@@ -1,0 +1,5 @@
+<!-- ai-generated: 90% - AI drafted this explanation from the measured Toxiproxy run; values are observed. -->
+
+# Client-server latency gap
+
+I put a 100 ms downstream latency toxic with 10 ms jitter in front of `svcdesk`. The 60-second open-loop run at 40 requests per second measured a client p99 of 235.5 ms and a server histogram p99 of 129.1 ms, for a 106.4 ms gap. The client time includes the proxy's response delay and network scheduling; the server histogram stops when the service finishes its response, before Toxiproxy forwards the response to the client. The measured gap is close to the toxic's configured delay, with the remaining few milliseconds coming from jitter, request scheduling, connection handling and the different percentile interpolation methods. This is why a service-side latency dashboard can look healthy while callers experience materially slower responses: the server timer cannot observe time spent after the response leaves the application. The checker repeats this comparison with the same toxic and checks that this recorded gap is in the same range.

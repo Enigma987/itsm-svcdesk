@@ -3,11 +3,11 @@ lab3_first_draft:
   source: ai
   tool: "OpenAI Codex (GPT-6), Codex desktop, 10 October 2026"
   ladder: [0.005, 0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 7.5, 10]
-  verdict: TODO
-  evidence: {p99_seconds: TODO, bucket: [TODO, TODO], relative_width: TODO}
+  verdict: refuted
+  evidence: {p99_seconds: 0.131703, bucket: [0.1, 0.25], relative_width: 1.1389}
 lab3_flawed_ladder:
   verdict: refuted
-  evidence: {p99_seconds: TODO, bucket: [TODO, TODO], relative_width: TODO}
+  evidence: {p99_seconds: 0.131703, bucket: [0.04, 0.5], relative_width: 3.4927}
 ---
 <!-- ai-generated: 90% - AI supplied the exchange verbatim; assistant will add measured evidence and verdicts. -->
 
@@ -50,12 +50,12 @@ This is a generic starting point. Once the service's actual latency distribution
 
 ## Verdict on the draft ladder
 
-TODO: after measurement, record the measured p99, its bucket and relative width, then state the verdict.
+The first open-loop measurement returned p99 = 0.1308 s. The assistant's bucket is (0.10, 0.25], so its width is (0.25 - 0.10) / 0.1308 = 1.147, or 114.7% of p99. M-11 allows at most 20%; the answer is refuted. Although these are familiar defaults, they are too coarse for this measured tail.
 
 ## The draft alert rule
 
-TODO: after selecting the SLO, explain what the draft alert would do and which parts were retained.
+The suggested alert uses 14.4 times the 99.9% availability error budget in both a one-hour and five-minute window, with a two-minute pending period. I retain the route filter, explicit 5xx numerator, paired windows, and P1 severity in my final rules. I use separate fast and slow burn-rate alerts so the short window confirms an active incident while the longer window catches sustained budget loss.
 
 ## Verdict on the instructor's flawed ladder
 
-TODO: after measurement, record the measured p99, its bucket and relative width, then explain why the verdict is refuted.
+At the same p99 of 0.1308 s, the instructor ladder places the value in (0.04, 0.50]. Its relative width is (0.50 - 0.04) / 0.1308 = 3.517, or 351.7%. This is far above M-11's 20% limit, so the flawed ladder is refuted.

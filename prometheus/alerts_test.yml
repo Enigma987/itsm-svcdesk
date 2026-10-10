@@ -1,0 +1,78 @@
+# ai-generated: 90% - AI wrote edge tests to catch the declared alert threshold and pending-time mutants.
+rule_files:
+  - alerts.yml
+
+evaluation_interval: 1m
+
+tests:
+  # At 17.33% errors both alerts should fire. This is below 1.5 times the fast threshold,
+  # so the fast rule's +5m and x1.5 mutants cannot fire at this evaluation.
+  - interval: 1m
+    input_series:
+      - series: 'http_server_request_duration_seconds_count{job="svcdesk", instance="svcdesk:8080", http_request_method="GET", http_route="/kb/search", http_response_status_code="200"}'
+        values: '0+496x3'
+      - series: 'http_server_request_duration_seconds_count{job="svcdesk", instance="svcdesk:8080", http_request_method="GET", http_route="/kb/search", http_response_status_code="502"}'
+        values: '0+104x3'
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: KbSearchErrorsBurnFast
+        exp_alerts:
+          - exp_labels: {service: svcdesk, slo: availability, severity: P1}
+            exp_annotations:
+              summary: "Search errors are consuming the availability budget rapidly"
+              description: "The 5xx ratio exceeded the 14.4x budget threshold in both 1h and 5m windows."
+      - eval_time: 1m
+        alertname: KbSearchErrorsBurnSlow
+        exp_alerts:
+          - exp_labels: {service: svcdesk, slo: availability, severity: P2}
+            exp_annotations:
+              summary: "Search is steadily consuming its availability budget"
+              description: "The 5xx ratio exceeded the 6x budget threshold in both 6h and 30m windows."
+
+  # 7.17% is above the slow threshold (6%) but below 1.5 times it (9%).
+  - interval: 1m
+    input_series:
+      - series: 'http_server_request_duration_seconds_count{job="svcdesk", instance="svcdesk:8080", http_request_method="GET", http_route="/kb/search", http_response_status_code="200"}'
+        values: '0+557x3'
+      - series: 'http_server_request_duration_seconds_count{job="svcdesk", instance="svcdesk:8080", http_request_method="GET", http_route="/kb/search", http_response_status_code="502"}'
+        values: '0+43x3'
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: KbSearchErrorsBurnSlow
+        exp_alerts:
+          - exp_labels: {service: svcdesk, slo: availability, severity: P2}
+            exp_annotations:
+              summary: "Search is steadily consuming its availability budget"
+              description: "The 5xx ratio exceeded the 6x budget threshold in both 6h and 30m windows."
+
+  # 11.5% is below the fast threshold (14.4%) but above the slow threshold (6%).
+  # This kills the fast threshold /1.5 mutant while confirming the slow rule remains active.
+  - interval: 1m
+    input_series:
+      - series: 'http_server_request_duration_seconds_count{job="svcdesk", instance="svcdesk:8080", http_request_method="GET", http_route="/kb/search", http_response_status_code="200"}'
+        values: '0+531x3'
+      - series: 'http_server_request_duration_seconds_count{job="svcdesk", instance="svcdesk:8080", http_request_method="GET", http_route="/kb/search", http_response_status_code="502"}'
+        values: '0+69x3'
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: KbSearchErrorsBurnFast
+        exp_alerts: []
+      - eval_time: 1m
+        alertname: KbSearchErrorsBurnSlow
+        exp_alerts:
+          - exp_labels: {service: svcdesk, slo: availability, severity: P2}
+            exp_annotations:
+              summary: "Search is steadily consuming its availability budget"
+              description: "The 5xx ratio exceeded the 6x budget threshold in both 6h and 30m windows."
+
+  # 4.5% is below the slow threshold (6%) but above its threshold /1.5 mutant.
+  - interval: 1m
+    input_series:
+      - series: 'http_server_request_duration_seconds_count{job="svcdesk", instance="svcdesk:8080", http_request_method="GET", http_route="/kb/search", http_response_status_code="200"}'
+        values: '0+573x3'
+      - series: 'http_server_request_duration_seconds_count{job="svcdesk", instance="svcdesk:8080", http_request_method="GET", http_route="/kb/search", http_response_status_code="502"}'
+        values: '0+27x3'
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: KbSearchErrorsBurnSlow
+        exp_alerts: []
