@@ -1,0 +1,11 @@
+{
+  "run": "ec32ba4dcd5b15ca",
+  "onset": "2026-10-25T15:26:04Z",
+  "detection": "2026-10-25T15:31:19Z",
+  "detecting_alert": "CheckoutLatencyHigh",
+  "acknowledgement": "2026-10-25T15:31:43Z",
+  "recovery": "2026-10-25T15:38:19Z",
+  "mttd_seconds": 315,
+  "mtta_seconds": 24,
+  "mttr_seconds": 735
+}

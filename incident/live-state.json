@@ -1,0 +1,37 @@
+{
+  "run": "ec32ba4dcd5b15ca",
+  "arm": {
+    "armed_at": "2026-10-25T15:20:48Z",
+    "onset_window": "2m0s to 6m0s after arming",
+    "run": "ec32ba4dcd5b15ca"
+  },
+  "ticket_id": "4dad5d92-4e99-4171-81bd-eff5de44ad44",
+  "page": {
+    "received_at": "2026-10-25T15:31:39.781380098Z",
+    "hook": "pager",
+    "receiver": "pager",
+    "status": "firing",
+    "reason": "first notification",
+    "alerts": [
+      {
+        "status": "firing",
+        "labels": {
+          "alertname": "CheckoutLatencyHigh",
+          "service": "checkout",
+          "severity": "P1",
+          "system": "shop"
+        },
+        "annotations": {
+          "description": "Investigate slow order placement and downstream calls; open and acknowledge a P1 ticket.",
+          "summary": "Checkout p99 latency exceeds 2 seconds"
+        },
+        "startsAt": "2026-10-25T15:31:19.815Z",
+        "endsAt": "0001-01-01T00:00:00Z",
+        "fingerprint": "283c9712e16f0a92"
+      }
+    ]
+  },
+  "created_at": "2026-10-25T15:31:41Z",
+  "acknowledged_at": "2026-10-25T15:31:43Z",
+  "ticket_state": "resolved"
+}

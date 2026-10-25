@@ -1,0 +1,23 @@
+{
+  "id": "4dad5d92-4e99-4171-81bd-eff5de44ad44",
+  "title": "Shop checkout incident, paged by CheckoutLatencyHigh",
+  "description": "A checkout symptom alert reached the course pager. Investigation and mitigation are in progress.",
+  "reporter": {
+    "name": "on-call",
+    "email": null,
+    "vip": false
+  },
+  "impact": 1,
+  "urgency": 1,
+  "priority": "P1",
+  "state": "resolved",
+  "created_at": "2026-10-25T15:31:41Z",
+  "acknowledged_at": "2026-10-25T15:31:43Z",
+  "resolved_at": "2026-10-25T15:42:01Z",
+  "closed_at": null,
+  "related_to": null,
+  "sla": {
+    "ack_due_at": "2026-10-25T15:46:41Z",
+    "resolve_due_at": "2026-10-25T19:31:41Z"
+  }
+}

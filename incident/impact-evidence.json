@@ -1,0 +1,1344 @@
+{
+  "clocks": {
+    "run": "ec32ba4dcd5b15ca",
+    "onset": "2026-10-25T15:26:04Z",
+    "detection": "2026-10-25T15:31:19Z",
+    "detecting_alert": "CheckoutLatencyHigh",
+    "acknowledgement": "2026-10-25T15:31:43Z",
+    "recovery": "2026-10-25T15:38:19Z",
+    "mttd_seconds": 315,
+    "mtta_seconds": 24,
+    "mttr_seconds": 735
+  },
+  "measurements": {
+    "baseline": {
+      "at": "2026-10-25T15:21:04Z",
+      "queries": {
+        "p99_ms": {
+          "expression": "histogram_quantile(0.99,sum by(service_name,le)(rate(traces_span_metrics_duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\"}[5m])))",
+          "result": [
+            {
+              "metric": {
+                "service_name": "frontend-proxy"
+              },
+              "value": [
+                1792941664,
+                "47.49565217391306"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "product-catalog"
+              },
+              "value": [
+                1792941664,
+                "7.970769230769227"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "flagd"
+              },
+              "value": [
+                1792941664,
+                "1.9817202432667245"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "payment"
+              },
+              "value": [
+                1792941664,
+                "5.379999999999993"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "recommendation"
+              },
+              "value": [
+                1792941664,
+                "5.160000000000005"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "quote"
+              },
+              "value": [
+                1792941664,
+                "1.9799999999999998"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend"
+              },
+              "value": [
+                1792941664,
+                "46.903125"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "cart"
+              },
+              "value": [
+                1792941664,
+                "2.7733333333333277"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "image-provider"
+              },
+              "value": [
+                1792941664,
+                "1.9800000000000002"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "email"
+              },
+              "value": [
+                1792941664,
+                "5.379999999999993"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "checkout"
+              },
+              "value": [
+                1792941664,
+                "49.599999999999994"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "currency"
+              },
+              "value": [
+                1792941664,
+                "1.9799999999999998"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "shipping"
+              },
+              "value": [
+                1792941664,
+                "3.379999999999993"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "ad"
+              },
+              "value": [
+                1792941664,
+                "33.200000000000095"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "telemetry-docs"
+              },
+              "value": [
+                1792941664,
+                "1.98"
+              ]
+            }
+          ]
+        },
+        "requests_per_second": {
+          "expression": "sum by(service_name)(rate(traces_span_metrics_calls_total{span_kind=\"SPAN_KIND_SERVER\"}[5m]))",
+          "result": [
+            {
+              "metric": {
+                "service_name": "payment"
+              },
+              "value": [
+                1792941664,
+                "0.12917097236574554"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "recommendation"
+              },
+              "value": [
+                1792941664,
+                "0.1750058335277843"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "currency"
+              },
+              "value": [
+                1792941664,
+                "0.35834527817593925"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "cart"
+              },
+              "value": [
+                1792941664,
+                "1.1833727790926365"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "shipping"
+              },
+              "value": [
+                1792941664,
+                "0.2583419447314911"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "image-provider"
+              },
+              "value": [
+                1792941664,
+                "0.34167805593519784"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "quote"
+              },
+              "value": [
+                1792941664,
+                "0.12917097236574554"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend"
+              },
+              "value": [
+                1792941664,
+                "4.129304310143672"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend-proxy"
+              },
+              "value": [
+                1792941664,
+                "2.216740558018601"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "email"
+              },
+              "value": [
+                1792941664,
+                "0.12917097236574554"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "ad"
+              },
+              "value": [
+                1792941664,
+                "0.1750058335277843"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "product-catalog"
+              },
+              "value": [
+                1792941664,
+                "2.1625720857361914"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "telemetry-docs"
+              },
+              "value": [
+                1792941664,
+                "0.19583986132871098"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "checkout"
+              },
+              "value": [
+                1792941664,
+                "0.12917097236574554"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "flagd"
+              },
+              "value": [
+                1792941664,
+                "4.813030878807072"
+              ]
+            }
+          ]
+        },
+        "errors_per_second": {
+          "expression": "sum by(service_name)(rate(traces_span_metrics_calls_total{span_kind=\"SPAN_KIND_SERVER\",status_code=\"STATUS_CODE_ERROR\"}[5m]))",
+          "result": [
+            {
+              "metric": {
+                "service_name": "flagd"
+              },
+              "value": [
+                1792941664,
+                "0.00858058231570682"
+              ]
+            }
+          ]
+        },
+        "recommendation_rss_bytes": {
+          "expression": "max(process_memory_usage_bytes{service_name=\"recommendation\"})",
+          "result": [
+            {
+              "metric": {},
+              "value": [
+                1792941664,
+                "70131712"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "fault": {
+      "at": "2026-10-25T15:32:39Z",
+      "queries": {
+        "p99_ms": {
+          "expression": "histogram_quantile(0.99,sum by(service_name,le)(rate(traces_span_metrics_duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\"}[5m])))",
+          "result": [
+            {
+              "metric": {
+                "service_name": "recommendation"
+              },
+              "value": [
+                1792942359,
+                "15000"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend"
+              },
+              "value": [
+                1792942359,
+                "15000"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "payment"
+              },
+              "value": [
+                1792942359,
+                "1.98"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "shipping"
+              },
+              "value": [
+                1792942359,
+                "7.360000000000003"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "image-provider"
+              },
+              "value": [
+                1792942359,
+                "1.98"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "quote"
+              },
+              "value": [
+                1792942359,
+                "1.98"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "product-catalog"
+              },
+              "value": [
+                1792942359,
+                "15000"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "checkout"
+              },
+              "value": [
+                1792942359,
+                "14600"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "flagd"
+              },
+              "value": [
+                1792942359,
+                "1.9829864253393665"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "currency"
+              },
+              "value": [
+                1792942359,
+                "1.9800000000000002"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "cart"
+              },
+              "value": [
+                1792942359,
+                "4.449999999999985"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend-proxy"
+              },
+              "value": [
+                1792942359,
+                "15000"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "email"
+              },
+              "value": [
+                1792942359,
+                "5.8933333333333335"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "ad"
+              },
+              "value": [
+                1792942359,
+                "5.539999999999999"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "telemetry-docs"
+              },
+              "value": [
+                1792942359,
+                "1.98"
+              ]
+            }
+          ]
+        },
+        "requests_per_second": {
+          "expression": "sum by(service_name)(rate(traces_span_metrics_calls_total{span_kind=\"SPAN_KIND_SERVER\"}[5m]))",
+          "result": [
+            {
+              "metric": {
+                "service_name": "payment"
+              },
+              "value": [
+                1792942359,
+                "0.06666944456019"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "recommendation"
+              },
+              "value": [
+                1792942359,
+                "0.09583732655527312"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "currency"
+              },
+              "value": [
+                1792942359,
+                "0.20834201425059376"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "cart"
+              },
+              "value": [
+                1792942359,
+                "0.6458602441768406"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "shipping"
+              },
+              "value": [
+                1792942359,
+                "0.13333888912038"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "image-provider"
+              },
+              "value": [
+                1792942359,
+                "0.34168090337097373"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "quote"
+              },
+              "value": [
+                1792942359,
+                "0.06666944456019"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend"
+              },
+              "value": [
+                1792942359,
+                "2.3750989624567684"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend-proxy"
+              },
+              "value": [
+                1792942359,
+                "1.304221009208717"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "email"
+              },
+              "value": [
+                1792942359,
+                "0.06666944456019"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "ad"
+              },
+              "value": [
+                1792942359,
+                "0.09583732655527312"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "product-catalog"
+              },
+              "value": [
+                1792942359,
+                "1.2083836826534438"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "telemetry-docs"
+              },
+              "value": [
+                1792942359,
+                "0.20000833368057"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "checkout"
+              },
+              "value": [
+                1792942359,
+                "0.06666944456019"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "flagd"
+              },
+              "value": [
+                1792942359,
+                "2.766781949247885"
+              ]
+            }
+          ]
+        },
+        "errors_per_second": {
+          "expression": "sum by(service_name)(rate(traces_span_metrics_calls_total{span_kind=\"SPAN_KIND_SERVER\",status_code=\"STATUS_CODE_ERROR\"}[5m]))",
+          "result": [
+            {
+              "metric": {
+                "service_name": "flagd"
+              },
+              "value": [
+                1792942359,
+                "0"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend"
+              },
+              "value": [
+                1792942359,
+                "0.041668402850118746"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend-proxy"
+              },
+              "value": [
+                1792942359,
+                "0.22084253510562937"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "ad"
+              },
+              "value": [
+                1792942359,
+                "0.020834201425059373"
+              ]
+            }
+          ]
+        },
+        "recommendation_rss_bytes": {
+          "expression": "max(process_memory_usage_bytes{service_name=\"recommendation\"})",
+          "result": [
+            {
+              "metric": {},
+              "value": [
+                1792942359,
+                "70389760"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "recovered": {
+      "at": "2026-10-25T15:41:00Z",
+      "queries": {
+        "p99_ms": {
+          "expression": "histogram_quantile(0.99,sum by(service_name,le)(rate(traces_span_metrics_duration_milliseconds_bucket{span_kind=\"SPAN_KIND_SERVER\"}[5m])))",
+          "result": [
+            {
+              "metric": {
+                "service_name": "payment"
+              },
+              "value": [
+                1792942860,
+                "7.480000000000002"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "recommendation"
+              },
+              "value": [
+                1792942860,
+                "3.949230769230769"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "image-provider"
+              },
+              "value": [
+                1792942860,
+                "1.9800000000000002"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "email"
+              },
+              "value": [
+                1792942860,
+                "9.480000000000002"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "flagd"
+              },
+              "value": [
+                1792942860,
+                "1.9854345837145468"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "quote"
+              },
+              "value": [
+                1792942860,
+                "1.98"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend-proxy"
+              },
+              "value": [
+                1792942860,
+                "46.33207547169813"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "cart"
+              },
+              "value": [
+                1792942860,
+                "1.9956521739130435"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend"
+              },
+              "value": [
+                1792942860,
+                "46.222222222222236"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "ad"
+              },
+              "value": [
+                1792942860,
+                "3.892499999999999"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "product-catalog"
+              },
+              "value": [
+                1792942860,
+                "7.049999999999994"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "currency"
+              },
+              "value": [
+                1792942860,
+                "1.98"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "shipping"
+              },
+              "value": [
+                1792942860,
+                "2.960000000000005"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "telemetry-docs"
+              },
+              "value": [
+                1792942860,
+                "1.98"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "checkout"
+              },
+              "value": [
+                1792942860,
+                "49.6"
+              ]
+            }
+          ]
+        },
+        "requests_per_second": {
+          "expression": "sum by(service_name)(rate(traces_span_metrics_calls_total{span_kind=\"SPAN_KIND_SERVER\"}[5m]))",
+          "result": [
+            {
+              "metric": {
+                "service_name": "payment"
+              },
+              "value": [
+                1792942860,
+                "0.10833829883869676"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "recommendation"
+              },
+              "value": [
+                1792942860,
+                "0.13750630237219205"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "currency"
+              },
+              "value": [
+                1792942860,
+                "0.3250148965160903"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "cart"
+              },
+              "value": [
+                1792942860,
+                "1.0625487001487568"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "shipping"
+              },
+              "value": [
+                1792942860,
+                "0.21667659767739353"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "image-provider"
+              },
+              "value": [
+                1792942860,
+                "0.29584689298259503"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "quote"
+              },
+              "value": [
+                1792942860,
+                "0.10833829883869676"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend"
+              },
+              "value": [
+                1792942860,
+                "3.8960119005454414"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend-proxy"
+              },
+              "value": [
+                1792942860,
+                "2.025092816754101"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "email"
+              },
+              "value": [
+                1792942860,
+                "0.10833829883869676"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "ad"
+              },
+              "value": [
+                1792942860,
+                "0.17917487884861388"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "product-catalog"
+              },
+              "value": [
+                1792942860,
+                "2.000091670868248"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "telemetry-docs"
+              },
+              "value": [
+                1792942860,
+                "0.2000091670868248"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "checkout"
+              },
+              "value": [
+                1792942860,
+                "0.10833829883869676"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "flagd"
+              },
+              "value": [
+                1792942860,
+                "4.566875981815833"
+              ]
+            }
+          ]
+        },
+        "errors_per_second": {
+          "expression": "sum by(service_name)(rate(traces_span_metrics_calls_total{span_kind=\"SPAN_KIND_SERVER\",status_code=\"STATUS_CODE_ERROR\"}[5m]))",
+          "result": [
+            {
+              "metric": {
+                "service_name": "flagd"
+              },
+              "value": [
+                1792942860,
+                "0.004166857647642183"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend"
+              },
+              "value": [
+                1792942860,
+                "0"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "frontend-proxy"
+              },
+              "value": [
+                1792942860,
+                "0"
+              ]
+            },
+            {
+              "metric": {
+                "service_name": "ad"
+              },
+              "value": [
+                1792942860,
+                "0"
+              ]
+            }
+          ]
+        },
+        "recommendation_rss_bytes": {
+          "expression": "max(process_memory_usage_bytes{service_name=\"recommendation\"})",
+          "result": [
+            {
+              "metric": {},
+              "value": [
+                1792942860,
+                "70389760"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "incident_calls": {
+    "expression": "sum by(service_name)(increase(traces_span_metrics_calls_total{span_kind=\"SPAN_KIND_SERVER\"}[735s]))",
+    "at": "2026-10-25T15:38:19Z",
+    "result": [
+      {
+        "metric": {
+          "service_name": "payment"
+        },
+        "value": [
+          1792942699,
+          "57.16920752033423"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "recommendation"
+        },
+        "value": [
+          1792942699,
+          "75.54502422329881"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "currency"
+        },
+        "value": [
+          1792942699,
+          "172.52850126672297"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "cart"
+        },
+        "value": [
+          1792942699,
+          "546.170107560336"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "shipping"
+        },
+        "value": [
+          1792942699,
+          "114.33841504066847"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "image-provider"
+        },
+        "value": [
+          1792942699,
+          "239.90649584425972"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "quote"
+        },
+        "value": [
+          1792942699,
+          "57.16920752033423"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "frontend"
+        },
+        "value": [
+          1792942699,
+          "2162.9648984399305"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "frontend-proxy"
+        },
+        "value": [
+          1792942699,
+          "1180.0368016356283"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "email"
+        },
+        "value": [
+          1792942699,
+          "57.16920752033423"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "ad"
+        },
+        "value": [
+          1792942699,
+          "109.09548202142317"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "product-catalog"
+        },
+        "value": [
+          1792942699,
+          "1035.1710076003378"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "telemetry-docs"
+        },
+        "value": [
+          1792942699,
+          "144.9647762122761"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "checkout"
+        },
+        "value": [
+          1792942699,
+          "57.16920752033423"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "flagd"
+        },
+        "value": [
+          1792942699,
+          "2428.6704409084846"
+        ]
+      }
+    ]
+  },
+  "incident_errors": {
+    "expression": "sum by(service_name)(increase(traces_span_metrics_calls_total{span_kind=\"SPAN_KIND_SERVER\",status_code=\"STATUS_CODE_ERROR\"}[735s]))",
+    "at": "2026-10-25T15:38:19Z",
+    "result": [
+      {
+        "metric": {
+          "service_name": "flagd"
+        },
+        "value": [
+          1792942699,
+          "4.083514822881017"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "frontend"
+        },
+        "value": [
+          1792942699,
+          "24.224009955998042"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "frontend-proxy"
+        },
+        "value": [
+          1792942699,
+          "97.90537357215877"
+        ]
+      },
+      {
+        "metric": {
+          "service_name": "ad"
+        },
+        "value": [
+          1792942699,
+          "12.112004977999021"
+        ]
+      }
+    ]
+  },
+  "catalog_buckets_during_fault": {
+    "expression": "sum by(le)(rate(traces_span_metrics_duration_milliseconds_bucket{service_name=\"product-catalog\",span_kind=\"SPAN_KIND_SERVER\"}[5m]))",
+    "at": "2026-10-25T15:32:39Z",
+    "result": [
+      {
+        "metric": {
+          "le": "2"
+        },
+        "value": [
+          1792942359,
+          "0.47918663277636564"
+        ]
+      },
+      {
+        "metric": {
+          "le": "4"
+        },
+        "value": [
+          1792942359,
+          "0.5625234384766031"
+        ]
+      },
+      {
+        "metric": {
+          "le": "6"
+        },
+        "value": [
+          1792942359,
+          "0.6291928830367931"
+        ]
+      },
+      {
+        "metric": {
+          "le": "8"
+        },
+        "value": [
+          1792942359,
+          "0.6750281261719238"
+        ]
+      },
+      {
+        "metric": {
+          "le": "10"
+        },
+        "value": [
+          1792942359,
+          "0.6750281261719238"
+        ]
+      },
+      {
+        "metric": {
+          "le": "50"
+        },
+        "value": [
+          1792942359,
+          "0.6958623275969832"
+        ]
+      },
+      {
+        "metric": {
+          "le": "100"
+        },
+        "value": [
+          1792942359,
+          "0.6958623275969832"
+        ]
+      },
+      {
+        "metric": {
+          "le": "200"
+        },
+        "value": [
+          1792942359,
+          "0.6958623275969832"
+        ]
+      },
+      {
+        "metric": {
+          "le": "400"
+        },
+        "value": [
+          1792942359,
+          "0.700029167881995"
+        ]
+      },
+      {
+        "metric": {
+          "le": "800"
+        },
+        "value": [
+          1792942359,
+          "0.700029167881995"
+        ]
+      },
+      {
+        "metric": {
+          "le": "1000"
+        },
+        "value": [
+          1792942359,
+          "0.700029167881995"
+        ]
+      },
+      {
+        "metric": {
+          "le": "1400"
+        },
+        "value": [
+          1792942359,
+          "0.700029167881995"
+        ]
+      },
+      {
+        "metric": {
+          "le": "2000"
+        },
+        "value": [
+          1792942359,
+          "0.7125296887370306"
+        ]
+      },
+      {
+        "metric": {
+          "le": "5000"
+        },
+        "value": [
+          1792942359,
+          "0.7833659735822325"
+        ]
+      },
+      {
+        "metric": {
+          "le": "10000"
+        },
+        "value": [
+          1792942359,
+          "0.8583690987124462"
+        ]
+      },
+      {
+        "metric": {
+          "le": "15000"
+        },
+        "value": [
+          1792942359,
+          "0.8917038209925412"
+        ]
+      },
+      {
+        "metric": {
+          "le": "+Inf"
+        },
+        "value": [
+          1792942359,
+          "1.2083836826534438"
+        ]
+      }
+    ]
+  }
+}
