@@ -1,0 +1,24 @@
+# ai-generated: 90% - Codex wrote route cases and matching/nonmatching equal-label inhibition cases.
+routes:
+  - labels: {alertname: CheckoutErrorRate, service: checkout, severity: P1, system: shop}
+    receivers: [pager]
+  - labels: {alertname: CheckoutLatencyHigh, service: checkout, severity: P1, system: shop}
+    receivers: [pager]
+  - labels: {alertname: FrontendErrorRate, service: frontend, severity: P2, system: shop}
+    receivers: [chat]
+  - labels: {alertname: KbSearchErrorsBurnFast, service: svcdesk, severity: P1, slo: availability}
+    receivers: [pager]
+  - labels: {alertname: KbSearchErrorsBurnSlow, service: svcdesk, severity: P2, slo: availability}
+    receivers: [chat]
+  - labels: {alertname: ItsmRouteCheck, service: frontend, severity: P3}
+    receivers: [chat]
+inhibitions:
+  - source: {alertname: CheckoutErrorRate, service: checkout, severity: P1, system: shop}
+    target: {alertname: FrontendErrorRate, service: frontend, severity: P2, system: shop}
+    inhibited: true
+  - source: {alertname: CheckoutErrorRate, service: checkout, severity: P1, system: shop}
+    target: {alertname: FrontendErrorRate, service: frontend, severity: P2, system: other}
+    inhibited: false
+  - source: {alertname: CheckoutErrorRate, service: checkout, severity: P1, system: shop}
+    target: {alertname: CheckoutLatencyHigh, service: checkout, severity: P1, system: shop}
+    inhibited: false

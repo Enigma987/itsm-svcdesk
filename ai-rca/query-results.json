@@ -1,0 +1,59 @@
+{
+  "source": "instructor-supplied lab4-rec-3 transcript, tested on our live run",
+  "run": "ec32ba4dcd5b15ca",
+  "onset": "2026-10-25T15:26:04Z",
+  "at": "2026-10-25T15:32:39Z",
+  "baseline": "2026-10-25T15:21:04Z",
+  "frontend_baseline": [
+    {
+      "metric": {},
+      "value": [
+        1792941664,
+        "4.129304310143672"
+      ]
+    }
+  ],
+  "frontend_incident": [
+    {
+      "metric": {},
+      "value": [
+        1792942359,
+        "2.3750989624567684"
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "id": "H1",
+      "expression": "sum(rate(traces_span_metrics_calls_total{service_name=\"checkout\",span_kind=\"SPAN_KIND_SERVER\",span_name=\"oteldemo.CheckoutService/PlaceOrder\",status_code=\"STATUS_CODE_ERROR\"}[5m])) > 0.01",
+      "at_result": [],
+      "baseline_result": []
+    },
+    {
+      "id": "H2",
+      "expression": "histogram_quantile(0.99,sum by(le)(rate(traces_span_metrics_duration_milliseconds_bucket{service_name=\"product-catalog\",span_kind=\"SPAN_KIND_SERVER\"}[5m]))) > 2000 unless on() sum(rate(traces_span_metrics_calls_total{service_name=\"product-catalog\",span_kind=\"SPAN_KIND_SERVER\",status_code=\"STATUS_CODE_ERROR\"}[5m])) > 0.01",
+      "at_result": [
+        {
+          "metric": {},
+          "value": [
+            1792942359,
+            "15000"
+          ]
+        }
+      ],
+      "baseline_result": []
+    },
+    {
+      "id": "H3",
+      "expression": "sum(rate(traces_span_metrics_calls_total{service_name=\"payment\",span_kind=\"SPAN_KIND_SERVER\",status_code=\"STATUS_CODE_ERROR\"}[5m])) > 0.01",
+      "at_result": [],
+      "baseline_result": []
+    },
+    {
+      "id": "H4",
+      "expression": "(sum(rate(traces_span_metrics_calls_total{service_name=\"checkout\",span_kind=\"SPAN_KIND_SERVER\",span_name=\"oteldemo.CheckoutService/PlaceOrder\",status_code=\"STATUS_CODE_ERROR\"}[5m])) > 0.01) and on() (sum(rate(traces_span_metrics_calls_total{service_name=\"frontend\",span_kind=\"SPAN_KIND_SERVER\"}[5m])) > 8.25860862029)",
+      "at_result": [],
+      "baseline_result": []
+    }
+  ]
+}

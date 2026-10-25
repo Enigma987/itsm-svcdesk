@@ -303,6 +303,11 @@ def get_sla(ticket_id: str, x_test_clock: str | None = Header(default=None)):
     }
 
 
+@app.post("/tickets/{ticket_id}/ack")
+def acknowledge_ticket(ticket_id: str, x_test_clock: str | None = Header(default=None)):
+    return transition(ticket_id, "ack", x_test_clock)
+
+
 @app.post("/tickets/{ticket_id}/{action}")
 def transition(ticket_id: str, action: str, x_test_clock: str | None = Header(default=None)):
     if action not in ("ack", "start", "resolve", "close", "reopen"):

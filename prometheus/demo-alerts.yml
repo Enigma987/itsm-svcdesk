@@ -1,0 +1,49 @@
+# ai-generated: 90% - Codex designed symptom alerts using the course rules and measured healthy baseline.
+groups:
+  - name: shop-symptoms
+    rules:
+      - alert: CheckoutErrorRate
+        expr: |
+          sum(rate(traces_span_metrics_calls_total{service_name="checkout", span_kind="SPAN_KIND_SERVER", status_code="STATUS_CODE_ERROR"}[5m]))
+          /
+          sum(rate(traces_span_metrics_calls_total{service_name="checkout", span_kind="SPAN_KIND_SERVER"}[5m]))
+          > 0.05
+        for: 1m
+        keep_firing_for: 2m
+        labels:
+          service: checkout
+          severity: P1
+          system: shop
+        annotations:
+          summary: "More than 5% of checkout requests are failing"
+          description: "Inspect checkout and its dependencies; open and acknowledge a P1 service-desk ticket."
+
+      - alert: CheckoutLatencyHigh
+        expr: |
+          histogram_quantile(0.99,
+            sum by (le) (rate(traces_span_metrics_duration_milliseconds_bucket{service_name="checkout", span_kind="SPAN_KIND_SERVER"}[5m]))
+          ) > 2000
+        for: 1m
+        keep_firing_for: 2m
+        labels:
+          service: checkout
+          severity: P1
+          system: shop
+        annotations:
+          summary: "Checkout p99 latency exceeds 2 seconds"
+          description: "Investigate slow order placement and downstream calls; open and acknowledge a P1 ticket."
+
+      - alert: FrontendErrorRate
+        expr: |
+          sum(rate(traces_span_metrics_calls_total{service_name="frontend", span_kind="SPAN_KIND_SERVER", status_code="STATUS_CODE_ERROR"}[5m]))
+          /
+          sum(rate(traces_span_metrics_calls_total{service_name="frontend", span_kind="SPAN_KIND_SERVER"}[5m]))
+          > 0.05
+        for: 3m
+        labels:
+          service: frontend
+          severity: P2
+          system: shop
+        annotations:
+          summary: "More than 5% of frontend requests are failing"
+          description: "Inspect affected routes and downstream dependencies; checkout pages take priority."
