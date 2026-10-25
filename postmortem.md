@@ -21,7 +21,7 @@ The incident occurred on 25 October 2026. This review was written after recovery
 
 ## Authors
 
-Prepared for Enigma987's on-call exercise with Codex assistance. The AI scorecard evaluates the instructor-supplied qwen3:4b-instruct transcript against this live run.
+Prepared for Enigma987's on-call exercise with Codex assistance. The first AI scorecard evaluates the instructor-supplied qwen3:4b-instruct transcript; the second evaluates a fresh-context Codex investigation of the saved snapshot.
 
 ## Status
 
@@ -139,7 +139,7 @@ The injected faults had a direct rollback interface and the exercise used simula
 | 15:42:01 | Incident ticket reached resolved state. |
 | 15:42:06 | Official snapshot and ticket export were captured. |
 
-The instructor transcript was scored retrospectively. No recorded investigator hypothesis was used to choose a live mitigation; the rollback decisions used the visible flag document and measured service symptoms.
+Both investigator transcripts were scored retrospectively. No investigator hypothesis was used to choose a live mitigation; the rollback decisions used the visible flag document and measured service symptoms.
 
 ## Supporting information
 
@@ -152,6 +152,8 @@ H2 tests the component beyond what the checkout alert itself named, using:
     histogram_quantile(0.99,sum by(le)(rate(traces_span_metrics_duration_milliseconds_bucket{service_name="product-catalog",span_kind="SPAN_KIND_SERVER"}[5m]))) > 2000 unless on() sum(rate(traces_span_metrics_calls_total{service_name="product-catalog",span_kind="SPAN_KIND_SERVER",status_code="STATUS_CODE_ERROR"}[5m])) > 0.01
 
 It returned a value of 15,000 at the fault instant and no result on the baseline. The absence of a result here means the filtering prediction is false, rather than a zero-valued measurement. The other rejected claims retain their own explicit comparisons and returned results in the ledger.
+
+The second investigator received only the incident symptom and UTC window and used the real course MCP server. Its transcript is ai-rca/second/transcript.md; ai-rca-eval-2.json and ai-rca/second/query-results.json retain the independently scored claims and their five-minute comparisons. S1 correctly localized the catalog-to-database latency chain, while S2 and S3 were tested and rejected candidate explanations. The transcript explicitly preserves uncertainty about the exact database mechanism. ai-rca/COMPARISON.md explains the differences and the limitations of comparing an instructor recording from another run with a fresh investigation of this snapshot.
 
 ## Problem record
 

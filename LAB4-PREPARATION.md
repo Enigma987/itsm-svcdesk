@@ -44,9 +44,11 @@ The live run is `ec32ba4dcd5b15ca`. Practice P4 ticket `fc787bd8-2906-44ce-aa89-
 
 The live incident is complete. The official clocks are onset 15:26:04Z, detection 15:31:19Z, acknowledgement 15:31:43Z, and recovery 15:38:19Z on 25 October 2026: MTTD 315 s, MTTA 24 s, and MTTR 735 s. The P1 ticket is `4dad5d92-4e99-4171-81bd-eff5de44ad44`.
 
-The official snapshot and ticket, operations log and impact evidence were committed as `9a96bb6` (`Lab 4 incident evidence`); the snapshot and ticket match the committed blobs byte for byte. The final incident verification passed all five Core bundles, with the two sealed-fault checks skipped locally, and passed the regulator-clock option. The user chose to finish Core and regulator clocks only for now; no second investigator or Kubernetes artifact is claimed.
+The official snapshot and ticket, operations log and impact evidence were committed as `9a96bb6` (`Lab 4 incident evidence`); the snapshot and ticket match the committed blobs byte for byte. Verification passes all five Core bundles, with the two sealed-fault checks skipped locally, and two Stretch options: the independent second investigator and regulator clocks. All 24 checked files carry disclosure headers. The Kubernetes option is not attempted.
 
-The completed postmortem, scorecard and communications log await the implementation commit and push. The playground was stopped with `down -v` after the captured evidence was recomputed, verified and committed. Future checks can read the snapshot without restarting this incident.
+The postmortem, both scorecards, investigator comparison and communications log are complete. The second investigator used a fresh context and the real course MCP server against a separate copy of the saved snapshot; its tool calls and final answer are preserved under `ai-rca/second/`. Its precise inherited API model identifier was not exposed and the provenance records that limitation.
+
+The playground was stopped with `down -v` after the captured evidence was recomputed, verified and committed. Future checks can read the snapshot without restarting this incident. The separately served analysis copy was also stopped after the second-investigator evaluation.
 
 ## Stop the playground
 

@@ -1,0 +1,122 @@
+{
+  "at": "2026-10-25T15:32:39Z",
+  "baseline": "2026-10-25T15:21:04Z",
+  "queries": [
+    {
+      "id": "S1",
+      "expression": "(histogram_quantile(0.95,sum by(le)(rate(traces_span_metrics_duration_milliseconds_bucket{service_name=\"product-catalog\",span_name=\"astronomy-db\",span_kind=\"SPAN_KIND_CLIENT\"}[5m]))) > 2000) and on() (histogram_quantile(0.95,sum by(le)(rate(traces_span_metrics_duration_milliseconds_bucket{service_name=\"checkout\",span_kind=\"SPAN_KIND_SERVER\"}[5m]))) > 2000)",
+      "at_result": [
+        {
+          "metric": {},
+          "value": [
+            1792942359,
+            "15000"
+          ]
+        }
+      ],
+      "baseline_result": [],
+      "signals": {
+        "catalog_db_client_p95_ms": {
+          "expression": "histogram_quantile(0.95,sum by(le)(rate(traces_span_metrics_duration_milliseconds_bucket{service_name=\"product-catalog\",span_name=\"astronomy-db\",span_kind=\"SPAN_KIND_CLIENT\"}[5m])))",
+          "fault": [
+            {
+              "metric": {},
+              "value": [
+                1792942359,
+                "15000"
+              ]
+            }
+          ],
+          "baseline": [
+            {
+              "metric": {},
+              "value": [
+                1792941664,
+                "1.9297455968688844"
+              ]
+            }
+          ]
+        },
+        "checkout_server_p95_ms": {
+          "expression": "histogram_quantile(0.95,sum by(le)(rate(traces_span_metrics_duration_milliseconds_bucket{service_name=\"checkout\",span_kind=\"SPAN_KIND_SERVER\"}[5m])))",
+          "fault": [
+            {
+              "metric": {},
+              "value": [
+                1792942359,
+                "12999.999999999996"
+              ]
+            }
+          ],
+          "baseline": [
+            {
+              "metric": {},
+              "value": [
+                1792941664,
+                "48"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "expression": "sum(rate(db_sql_connection_wait_total{service_name=\"product-catalog\"}[5m])) > 0",
+      "at_result": [],
+      "baseline_result": [],
+      "signals": {
+        "pool_waits_per_second": {
+          "expression": "sum(rate(db_sql_connection_wait_total{service_name=\"product-catalog\"}[5m]))",
+          "fault": [
+            {
+              "metric": {},
+              "value": [
+                1792942359,
+                "0"
+              ]
+            }
+          ],
+          "baseline": [
+            {
+              "metric": {},
+              "value": [
+                1792941664,
+                "0"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "expression": "histogram_quantile(0.95,sum by(le)(rate(traces_span_metrics_duration_milliseconds_bucket{service_name=\"checkout\",span_name=\"oteldemo.PaymentService/Charge\",span_kind=\"SPAN_KIND_CLIENT\"}[5m]))) > 1000",
+      "at_result": [],
+      "baseline_result": [],
+      "signals": {
+        "checkout_payment_client_p95_ms": {
+          "expression": "histogram_quantile(0.95,sum by(le)(rate(traces_span_metrics_duration_milliseconds_bucket{service_name=\"checkout\",span_name=\"oteldemo.PaymentService/Charge\",span_kind=\"SPAN_KIND_CLIENT\"}[5m])))",
+          "fault": [
+            {
+              "metric": {},
+              "value": [
+                1792942359,
+                "3.8"
+              ]
+            }
+          ],
+          "baseline": [
+            {
+              "metric": {},
+              "value": [
+                1792941664,
+                "3.8428571428571425"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

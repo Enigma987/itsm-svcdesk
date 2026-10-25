@@ -1,0 +1,2 @@
+# ai-generated: 90% - Codex recorded the course MCP dependency used by the independent investigator adapter.
+mcp==2.2.0
