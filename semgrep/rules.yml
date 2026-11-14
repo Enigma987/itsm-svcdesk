@@ -1,0 +1,13 @@
+# ai-generated: 100% - Codex wrote service-specific audit guards for the test-clock switch and bulk ticket reads.
+rules:
+  - id: svcdesk-test-clock-switch
+    languages: [python]
+    severity: INFO
+    message: Review the SLA test-clock switch when changing deployment settings. Caller-supplied time is intended for course checks.
+    pattern: os.environ.get("SVCDESK_TEST_CLOCK", ...)
+
+  - id: svcdesk-bulk-ticket-read
+    languages: [python]
+    severity: INFO
+    message: Review bulk ticket reads when changing API projections. Stored ticket JSON includes reporter information and lifecycle data.
+    pattern: $DB.execute("SELECT data FROM tickets").fetchall()
