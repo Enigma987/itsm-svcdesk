@@ -7,3 +7,6 @@ __pycache__/
 # local data: use a named volume in docker-compose.yml, never a bind mount
 data/
 *.db
+
+# Local course package includes intentionally vulnerable practice fixtures.
+/Laboratory 5/
